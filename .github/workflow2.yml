@@ -1,0 +1,67 @@
+# github workflow to deploy a .net core application to azure app service
+# with sonarcloud integration for code quality analysis
+name: Build, Test, and Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+
+env:
+  AZURE_WEBAPP_NAME: <your-app-name>
+  AZURE_WEBAPP_PACKAGE_PATH: <path-to-your-package>
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  SONAR_ORGANIZATION: <your-organization-name>
+  SONAR_PROJECT_KEY: <your-project-key>
+  SONAR_PROJECT_NAME: <your-project-name>
+
+jobs:
+  name: build-and-deploy
+  runs-on: ubuntu-latest
+
+  steps:
+
+  # build and test
+  - name: Checkout code
+    uses: actions/checkout@v2
+
+  - name: Setup .NET Core
+    uses: actions/setup-dotnet@v1
+    with:
+      dotnet-version: '6.0.x'
+
+  - name: Restore dependencies
+    run: dotnet restore
+
+  - name: Build and test
+    run: dotnet build && dotnet test
+
+  # code quality analysis
+  - name: SonarCloud Scan
+    uses: sonarsource/sonarcloud-github-action@master
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_PROJECT_KEY: ${{ env.SONAR_PROJECT_KEY }}
+      SONAR_PROJECT_NAME: ${{ env.SONAR_PROJECT_NAME }}
+      SONAR_ORGANIZATION: ${{ env.SONAR_ORGANIZATION }}
+  
+  # publish to azure
+  - name: Publish to Azure
+    run: dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  # deploy to azure
+  - name: Set up Azure credentials
+    uses: azure/login@v1
+    with:
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+  - name: Deploy to Azure
+    uses: azure/webapps-deploy@v2
+    with:
+      app-name: ${{ env.AZURE_WEBAPP_NAME }}
+      package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+  

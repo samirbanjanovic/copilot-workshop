@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BraggingRights.WebAPI", "BraggingRights.WebAPI\BraggingRights.WebAPI.csproj", "{3AA75537-56AF-42B0-A98E-AFC6B85AC907}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BraggingRights.Tests", "BraggingRights.Tests\BraggingRights.Tests.csproj", "{65772BE8-EE1A-46D5-981B-C74E815C8133}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AA75537-56AF-42B0-A98E-AFC6B85AC907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AA75537-56AF-42B0-A98E-AFC6B85AC907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AA75537-56AF-42B0-A98E-AFC6B85AC907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AA75537-56AF-42B0-A98E-AFC6B85AC907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65772BE8-EE1A-46D5-981B-C74E815C8133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65772BE8-EE1A-46D5-981B-C74E815C8133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65772BE8-EE1A-46D5-981B-C74E815C8133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65772BE8-EE1A-46D5-981B-C74E815C8133}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
